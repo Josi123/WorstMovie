@@ -1,0 +1,59 @@
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">listaaa</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="margin20" *ngIf="listMovies">
+    <h2 class="title">List Movies</h2>
+
+    <div *ngIf="listMovies.content && listMovies.content.length === 0">
+      <br>
+      <ion-icon name="videocam"></ion-icon>
+      Nenhum filme para mostrar.
+    </div>
+    <div>
+      <table class="standart-table">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Year <ion-searchbar placeholder="Filter by year" (ionInput)="onSearchChange($event)">
+              </ion-searchbar>
+            </th>
+            <th scope="col">Title</th>
+            <th scope="col">Winner?
+              <span class="check-winner">
+                <select name="winner" (change)="filterByWinner($event)">
+                  <option value="default">YES/NO</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of listMovies.content">
+            <td data-label="ID">{{ movie.id }}</td>
+            <td data-label="Year">{{ movie.year }}</td>
+            <td data-label="Title">{{ movie.title }}</td>
+            <td data-label="Winner">{{ movie.winner ? 'Yes' : 'No' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pagination">
+      <ul>
+        <li (click)="paginationMovies(listMovies.number - 2)">&lt;&lt;</li>
+        <li (click)="paginationMovies(listMovies.number - 1)"> &lt; </li>
+        <ng-container *ngFor="let page of getTotalPages()">
+          <li [class.active]="listMovies.number === (page - 1)" (click)="paginationMovies(page - 1)">{{ page }}</li>
+        </ng-container>
+        <li (click)="paginationMovies(listMovies.number + 1)"> &gt; </li>
+        <li (click)="paginationMovies(listMovies.number + 2)"> &gt;&gt; </li>
+      </ul>
+    </div>
+  </div>
+</ion-content>

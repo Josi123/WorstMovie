@@ -1,2 +1,43 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+:root {
+	--ion-font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+
+	--ion-color-primary: #343a40;
+	--ion-color-primary-rgb: 52,58,64;
+	--ion-color-primary-contrast: #ffffff;
+	--ion-color-primary-contrast-rgb: 255,255,255;
+	--ion-color-primary-shade: #2e3338;
+	--ion-color-primary-tint: #484e53;
+
+    --ion-color-secondary: #3e91e2;
+	--ion-color-secondary-rgb: 62,145,226;
+	--ion-color-secondary-contrast: #000000;
+	--ion-color-secondary-contrast-rgb: 0,0,0;
+	--ion-color-secondary-shade: #3780c7;
+	--ion-color-secondary-tint: #519ce5;
+
+    --ion-background: #f8f9fa;
+	--ion-border: #e1e1e1;
+	--ion-font-size-title: 16px;
+	--border-radius:4px;
+	--ion-white: #fff;
+  
+}
+
+.ion-color-primary {
+	--ion-color-base: var(--ion-color-primary);
+	--ion-color-base-rgb: var(--ion-color-primary-rgb);
+	--ion-color-contrast: var(--ion-color-primary-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb);
+	--ion-color-shade: var(--ion-color-primary-shade);
+	--ion-color-tint: var(--ion-color-primary-tint);
+}
+.ion-color-secondary {
+	--ion-color-base: var(--ion-color-secondary);
+	--ion-color-base-rgb: var(--ion-color-secondary-rgb);
+	--ion-color-contrast: var(--ion-color-secondary-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-secondary-contrast-rgb);
+	--ion-color-shade: var(--ion-color-secondary-shade);
+	--ion-color-tint: var(--ion-color-secondary-tint);
+}

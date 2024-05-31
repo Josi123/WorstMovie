@@ -1,0 +1,129 @@
+
+<ion-content [fullscreen]="true">
+ <ion-grid class="margin20">
+  <ion-row>
+    <ion-col size="12" size-lg="6">
+     <div class="box">
+      <h3 class="title">List years with multiple winners</h3>
+      <table class="standart-table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of listYearsMultipleWinners">
+            <td data-label="ID">{{ movie.year }}</td>
+            <td data-label="Year">{{ movie.winnerCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+     </div>
+    </ion-col>
+    <ion-col size="12" size-lg="6">
+      <div class="box">
+        <h3 class="title">Top 3 studios with winners</h3>
+        <table class="standart-table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Year</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="listStudios">
+            <tr *ngFor="let studio of listStudios">
+              <td data-label="ID">{{ studio.name }}</td>
+              <td data-label="Year">{{ studio.winCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>    
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12" size-lg="6">
+     <div class="box">
+      <h3 class="title">Producers with longest and shortest interval between wins</h3>
+      <h4>Maximum</h4>
+      <table class="standart-table" *ngIf="listIntervalAwards.max && listIntervalAwards.max.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">Producer</th>
+            <th scope="col">Interval</th>
+            <th scope="col">Previous Year</th>
+            <th scope="col">Following Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producerInterval of listIntervalAwards.max">
+            <td data-label="Producer">{{producerInterval.producer}}</td>
+            <td data-label="Interval">{{producerInterval.interval}}</td>
+            <td data-label="Previous Year">{{producerInterval.previousWin}}</td>
+            <td data-label="Following Year">{{producerInterval.followingWin}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Minimum</h4>
+      <table class="standart-table" *ngIf="listIntervalAwards.min && listIntervalAwards.min.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">Producer</th>
+            <th scope="col">Interval</th>
+            <th scope="col">Previous Year</th>
+            <th scope="col">Following Year</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producerInterval of listIntervalAwards.min">
+            <td data-label="Producer">{{producerInterval.producer}}</td>
+            <td data-label="Interval">{{producerInterval.interval}}</td>
+            <td data-label="Previous Year">{{producerInterval.previousWin}}</td>
+            <td data-label="Following Year">{{producerInterval.followingWin}}</td>
+          </tr>
+        </tbody>
+      </table>
+     </div>
+    </ion-col>
+    <ion-col size="12" size-lg="6">
+      <div class="box">
+        <h3 class="title">List movie winners by year</h3>
+        <div class="search-year">
+          <ion-input [(ngModel)]="searchYear" type="number" placeholder="YYYY" min="1970" max="2024"></ion-input>
+          <ion-icon name="search" (click)="onSearch()"></ion-icon>
+        </div>
+        <table class="standart-table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Year</th>
+              <th scope="col">Title</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="listMoviesWinnerYear && listMoviesWinnerYear.length === 0 && !searchYear">
+            <tr>
+             <td colspan="3">
+               Fa&ccedil;a uma busca.
+             </td>
+            </tr>
+           </tbody>
+          <tbody *ngIf="listMoviesWinnerYear && listMoviesWinnerYear.length === 0 && searchYear">
+           <tr>
+            <td colspan="3">
+              N&atilde;o encontramos nenhum filme neste ano.
+            </td>
+           </tr>
+          </tbody>
+          <tbody *ngIf="listMoviesWinnerYear && listMoviesWinnerYear.length > 0">
+            <tr *ngFor="let movie of listMoviesWinnerYear">
+              <td data-label="ID">{{ movie.id }}</td>              
+              <td data-label="Year">{{ movie.year }}</td>
+              <td data-label="Title">{{ movie.title }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>    
+    </ion-col>
+  </ion-row>
+ </ion-grid>
+</ion-content>
