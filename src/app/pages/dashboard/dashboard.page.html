@@ -31,8 +31,8 @@
               <th scope="col">Year</th>
             </tr>
           </thead>
-          <tbody *ngIf="listStudios">
-            <tr *ngFor="let studio of listStudios">
+          <tbody *ngIf="studiosMoreWins">
+            <tr *ngFor="let studio of studiosMoreWins">
               <td data-label="ID">{{ studio.name }}</td>
               <td data-label="Year">{{ studio.winCount }}</td>
             </tr>

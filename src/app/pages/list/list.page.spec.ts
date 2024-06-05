@@ -3,8 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { IonicModule } from '@ionic/angular';
 import { ListPage } from './list.page';
-import { ApiService } from '../services/api.service';
-import { MoviesPaginated } from '../interfaces/movie.models';
+import { ApiService } from '../../services/api.service';
+import { MoviesPaginated } from '../../interfaces/movie.models';
 
 describe('ListPage', () => {
   let component: ListPage;

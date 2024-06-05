@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { MoviesPaginated } from '../interfaces/movie.models';
+import { MoviesPaginated } from '../../interfaces/movie.models';
 import { FormControl } from '@angular/forms';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import { LoadDataService } from 'src/app/services/load-data.service';
 
 @Component({
   selector: 'app-list',
@@ -18,7 +18,7 @@ export class ListPage implements OnInit {
   public page = 0;
   public size = 15;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private loadData: LoadDataService) {}
 
   ngOnInit() {
     this.getListMovies();
@@ -33,34 +33,20 @@ export class ListPage implements OnInit {
     }
   }
 
-  public getListMovies() {
-    this.urlApi = `page=${this.page}&size=${this.size}`;
-    if (
-      this.searchYear.value &&
-      this.selectWinner &&
-      (this.selectWinner === 'yes' || this.selectWinner === 'no')
-    ) {
-      this.urlApi += `&year=${this.searchYear.value}&winner=${this.selectWinner}`;
-    } else {
-      if (this.searchYear.value) {
-        this.urlApi += `&year=${this.searchYear.value}`;
-      }
-
-      if (
-        this.selectWinner &&
-        (this.selectWinner === 'yes' || this.selectWinner === 'no')
-      ) {
-        this.urlApi += `&winner=${this.selectWinner}`;
-      }
-    }
-
-    this.subscriptions = this.apiService.getData(this.urlApi).subscribe({
-      next: (response: MoviesPaginated) => {
-        this.listMovies = response;
-        console.log(this.listMovies);
-      },
-      error: this.handleErrors.bind(this),
-    });
+  getListMovies(): void {
+    this.subscriptions = this.loadData
+      .getListMovies(
+        this.page,
+        this.size,
+        this.searchYear.value,
+        this.selectWinner
+      )
+      .subscribe({
+        next: (response: MoviesPaginated) => {
+          this.listMovies = response;
+        },
+        error: this.handleErrors.bind(this),
+      });
   }
 
   public filterByWinner(event: Event) {

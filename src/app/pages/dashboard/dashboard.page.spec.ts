@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 import { DashboardPage } from './dashboard.page';
-import { ApiService } from '../services/api.service';
-import { MovieYear, Studio, ProducerIntervals, Movie } from '../interfaces/movie.models';
+import { ApiService } from '../../services/api.service';
+import { MovieYear, Studio, ProducerIntervals, Movie } from '../../interfaces/movie.models';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
